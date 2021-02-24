@@ -78,6 +78,7 @@ describe("controller", function () {
     setUpModel([todo]);
     subject.setView("");
     expect(view.render).toHaveBeenCalledWith("showEntries", [todo]);
+    expect(todo).toBeDefined();
   });
 
   describe("routing", function () {
@@ -207,6 +208,7 @@ describe("controller", function () {
     subject.setView("/");
 
     expect(view.render).toHaveBeenCalledWith("setFilter", "");
+  
   });
 
   it('should highlight "Active" filter when switching to active view', function () {
@@ -228,6 +230,12 @@ describe("controller", function () {
     subject.setView("#/active");
 
     expect(view.render).toHaveBeenCalledWith("setFilter", "active");
+     expect(model.read).toHaveBeenCalledWith(
+        {
+          completed:false,
+        },
+        jasmine.any(Function)
+      );
   });
 
   describe("toggle all", function () {
@@ -249,6 +257,13 @@ describe("controller", function () {
 
       subject.setView("#/completed");
       expect(view.render).toHaveBeenCalledWith("setFilter", "completed");
+       expect(model.read).toHaveBeenCalledWith(
+        {
+          completed:true,
+        },
+        jasmine.any(Function)
+      );
+      
     });
 
     it("should update the view", function () {
@@ -260,17 +275,13 @@ describe("controller", function () {
           title: "TodoNumber1",
           completed: true,
         },
-        {
-          id: 1,
-          title: "TodoNumber2",
-          completed: false,
-        },
+      
       ];
       setUpModel(todo);
       subject.setView("");
       view.trigger("toggleAll", {
         completed: false,
-        //what just happened here
+      
       });
       expect(view.render).toHaveBeenCalledWith("elementComplete", {
         id: 0,
