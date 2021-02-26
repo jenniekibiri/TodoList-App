@@ -78,7 +78,7 @@
 	Store.prototype.save = function (updateData, callback, id) {
 		var data = JSON.parse(localStorage[this._dbName]);
 		var todos = data.todos;
-		console.log(todos)
+		
 
 		callback = callback || function () {};
 
@@ -111,7 +111,7 @@
 			localStorage[this._dbName] = JSON.stringify(data);
 			callback.call(this, todos);
 		} else {
-
+// mozilla date.now generates milliseconds from january 1
     		// Assign an ID
 			updateData.id = Date.now();
 		
