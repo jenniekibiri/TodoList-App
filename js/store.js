@@ -88,18 +88,17 @@
 //format of the Id: the Id should follow the  charset
 //and should be 6  characters
 
-        for (var i = 0; i < 6; i++) {
-		// what happpens here
+        // for (var i = 0; i < 6; i++) {
+		// // what happpens here
 
-     		newId += charset.charAt(Math.floor(Math.random() * charset.length));
-			 console.log(newId)
+     	// 	newId += charset.charAt(Math.floor(Math.random() * charset.length));
+		// 	 console.log(newId)
 			
 			 	
-		}
+		// }
 
 		// If an ID was actually given, find the item and update each property
 		if (id) {
-			console.log(id)
 			for (var i = 0; i < todos.length; i++) {
 				if (todos[i].id === id) {
 					for (var key in updateData) {
@@ -115,9 +114,7 @@
 
     		// Assign an ID
 			updateData.id = Date.now();
-			console.log(newId)
-    
-console.log(updateData.id)
+		
 			todos.push(updateData);
 			localStorage[this._dbName] = JSON.stringify(data);
 			callback.call(this, [updateData]);
